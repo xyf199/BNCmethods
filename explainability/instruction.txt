@@ -1,0 +1,9 @@
+1. default file: fruit.bif, we point out features in this file.
+
+2. The main method is in explainability.cpp.
+
+3. Enter the assumption (for example goodfruit = yes)
+
+4. Enter the known features (for example sweetness = yes)
+
+5. Enter the threshold

@@ -1,0 +1,41 @@
+network unknown {
+}
+variable goodfruit {
+  type discrete [ 2 ] { no, yes };
+}
+variable price {
+  type discrete [ 2 ] { no, yes };
+}
+variable appearance {
+  type discrete [ 2 ] { no, yes };
+}
+variable sweetness {
+  type discrete [ 2 ] { no, yes };
+}
+probability ( goodfruit ) {
+  table 0.6, 0.4;
+}
+probability ( price | goodfruit ) {
+  (no) 0.75, 0.25;
+  (yes) 0.4, 0.6;
+}
+probability ( appearance | goodfruit ) {
+  (no) 0.65, 0.35;
+  (yes) 0.3, 0.7;
+}
+probability ( sweetness | goodfruit ) {
+  (no) 0.8, 0.2;
+  (yes) 0.1, 0.9;
+}
+
+root goodfruit{
+}
+
+feature price{
+}
+
+feature appearance{
+}
+
+feature sweetness{
+}
