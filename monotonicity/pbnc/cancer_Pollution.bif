@@ -1,0 +1,48 @@
+network unknown {
+}
+variable Pollution {
+  type discrete [ 2 ] { low, high };
+}
+variable Cancer {
+  type discrete [ 2 ] { True, False };
+}
+variable Xray {
+  type discrete [ 2 ] { positive, negative };
+}
+variable Dyspnoea {
+  type discrete [ 2 ] { True, False };
+}
+probability ( Pollution ){
+table p0, 0.1*((1-p0)/(1-0.9));
+}
+
+probability ( Cancer | Pollution ) {
+(low) p1, 0.97*((1-p1)/(1-0.03));
+(high) p2, 0.95*((1-p2)/(1-0.05));
+}
+
+probability ( Xray | Cancer ) {
+(True) 0.9*((1-p3)/(1-0.1)), p3;
+(False) 0.2*((1-p4)/(1-0.8)), p4;
+}
+
+probability ( Dyspnoea | Cancer ) {
+(True) 0.1, 0.9;
+(False) 0.2, 0.8;
+}
+
+parameter p0{
+}
+
+parameter p1{
+}
+
+parameter p2{
+}
+
+parameter p3{
+}
+
+parameter p4{
+}
+

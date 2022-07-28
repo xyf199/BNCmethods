@@ -1,0 +1,19 @@
+1. To check monotonicity for parameters, please first install the SMT-Solver dreal, it is availiable under http://dreal.github.io.
+
+2. The main method is in monotonicity.cpp.
+
+3. Enter the file name. (for example, hepar2_100_hepatotoxic)
+
+4. Enter the query (for example, a = yes, b = no, c = yes, d = no). We use yes/no (words) instead of 0/1 (numbers).
+
+Note1: In the experiments, we use the non-standard version of bif files for parameter, that is, e.g. parameter p0 is written as p00
+if we have up to double-digit parameters, p0 is written as p000 if we have up to three-figure parameters. We use the method
+replaceparameter() or replaceparameter2() to get the derived files. Replaceparameter() is used if we have up to double-digit
+parameters, replaceparameter2() is used if we have three-figure parameters.
+
+Note2: We use checkmonotonicitysimplify4() to check monotonicity, if one parameter appears only in one CPT's row. If one 
+parameter can appear at rows in different CPTs (or appear at more than one row in a CPT), we use the method
+checkmonotonicitysimplify6().
+
+Note3: If we want to check monotonicity for parameters in a conditional query, we use the method:
+checkmonotonicitysimplifyundercondition().

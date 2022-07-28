@@ -1,0 +1,172 @@
+network unknown {
+}
+variable hepatotoxic {
+  type discrete [ 2 ] { present, absent };
+}
+variable THepatitis {
+  type discrete [ 2 ] { present, absent };
+}
+variable RHepatitis {
+  type discrete [ 2 ] { present, absent };
+}
+variable fatigue {
+  type discrete [ 2 ] { present, absent };
+}
+variable phosphatase {
+  type discrete [ 3 ] { a4000_700, a699_240, a239_0 };
+}
+variable inr {
+  type discrete [ 3 ] { a200_110, a109_70, a69_0 };
+}
+variable bleeding {
+  type discrete [ 2 ] { present, absent };
+}
+variable hepatomegaly {
+  type discrete [ 2 ] { present, absent };
+}
+variable hepatalgia {
+  type discrete [ 2 ] { present, absent };
+}
+variable alt {
+  type discrete [ 4 ] { a850_200, a199_100, a99_35, a34_0 };
+}
+variable ast {
+  type discrete [ 4 ] { a700_400, a399_150, a149_40, a39_0 };
+}
+variable ggtp {
+  type discrete [ 4 ] { a640_70, a69_30, a29_10, a9_0 };
+}
+variable anorexia {
+  type discrete [ 2 ] { present, absent };
+}
+variable nausea {
+  type discrete [ 2 ] { present, absent };
+}
+variable spleen {
+  type discrete [ 2 ] { present, absent };
+}
+probability ( hepatotoxic ){
+table 0.08154506, 0.91845494;
+}
+
+probability ( THepatitis | hepatotoxic ){
+(present) p00, 0.8*((1-p00)/(1-0.2));
+(absent) 0.08888889, 0.91111111;
+}
+
+probability ( RHepatitis | hepatotoxic ){
+(present) p01, 0.98245614*((1-p01)/(1-0.01754386));
+(absent) p02, 0.97507788*((1-p02)/(1-0.02492212));
+}
+
+probability ( fatigue | THepatitis, RHepatitis ){
+(present, present) 0.6363636, 0.3636364;
+(absent, present) 0.6236559, 0.3763441;
+(present, absent) 0.625, 0.375;
+(absent, absent) p03, 0.3956044*((1-p03)/(1-0.6043956));
+}
+
+probability ( phosphatase | RHepatitis, THepatitis ){
+(present, present) 0.04166667, 0.29166667, 0.66666666;
+(absent, present) 0.04761905, 0.28571429, 0.66666666;
+(present, absent) 0.02898551, 0.28985507, 0.68115942;
+(absent, absent) 0.04597701, 0.29885057, 0.65517242;
+}
+
+probability ( inr | THepatitis ){
+(present) 0.01754386, 0.84210526, 0.14035088;
+(absent) 0.02150538, 0.81720430, 0.16129032;
+}
+
+probability ( bleeding | inr ){
+(a200_110) 0.1428571, 0.8571429;
+(a109_70) p04, 0.893617*((1-p04)/(1-0.106383));
+(a69_0) 0.09090909, 0.90909091;
+}
+
+probability ( hepatomegaly | RHepatitis, THepatitis ){
+(present, present) 0.6097561, 0.3902439;
+(absent, present) p05, 0.4*((1-p05)/(1-0.6));
+(present, absent) 0.5901639, 0.4098361;
+(absent, absent) 0.5866667, 0.4133333;
+}
+
+probability ( hepatalgia | hepatomegaly ){
+(present) p06, 0.6857749*((1-p06)/(1-0.3142251));
+(absent) 0.03070175, 0.96929825;
+}
+
+probability ( alt | RHepatitis, THepatitis ){
+(present, present) 0.05882353, 0.15686275, 0.41176471, 0.37254902;
+(absent, present) 0.0617284, 0.1728395, 0.4197531, 0.3456790;
+(present, absent) 0.06849315, 0.16438356, 0.42465753, 0.34246575;
+(absent, absent) 0.06862745, 0.16666667, 0.42156863, 0.34313725;
+}
+
+probability ( ast | RHepatitis, THepatitis ){
+(present, present) 0.01960784, 0.13725490, 0.47058824, 0.37254902;
+(absent, present) 0.02469136, 0.16049383, 0.46913580, 0.34567901;
+(present, absent) 0.02777778, 0.15277778, 0.48611111, 0.33333333;
+(absent, absent) 0.02912621, 0.16504854, 0.46601942, 0.33980583;
+}
+
+probability ( ggtp | THepatitis, RHepatitis ){
+(present, present) 0.1590909, 0.1477273, 0.1136364, 0.5795454;
+(absent, present) 0.1756757, 0.1621622, 0.1216216, 0.5405405;
+(present, absent) 0.1666667, 0.1590909, 0.1212121, 0.5530303;
+(absent, absent) 0.1787710, 0.1731844, 0.1229050, 0.5251396;
+}
+
+probability ( anorexia | RHepatitis, THepatitis ){
+(present, present) p07, 0.8181818*((1-p07)/(1-0.1818182));
+(absent, present) p08, 0.7777778*((1-p08)/(1-0.2222222));
+(present, absent) 0.1176471, 0.8823529;
+(absent, absent) 0.280916, 0.719084;
+}
+
+probability ( nausea | RHepatitis, THepatitis ){
+(present, present) 0.3636364, 0.6363636;
+(absent, present) p09, 0.6296296*((1-p09)/(1-0.3703704));
+(present, absent) 0.3529412, 0.6470588;
+(absent, absent) p10, 0.7145038*((1-p10)/(1-0.2854962));
+}
+
+probability ( spleen | RHepatitis, THepatitis ){
+(present, present) 0.3235294, 0.6764706;
+(absent, present) 0.3623188, 0.6376812;
+(present, absent) 0.3703704, 0.6296296;
+(absent, absent) 0.4827586, 0.5172414;
+}
+
+parameter p00{
+}
+
+parameter p01{
+}
+
+parameter p02{
+}
+
+parameter p03{
+}
+
+parameter p04{
+}
+
+parameter p05{
+}
+
+parameter p06{
+}
+
+parameter p07{
+}
+
+parameter p08{
+}
+
+parameter p09{
+}
+
+parameter p10{
+}

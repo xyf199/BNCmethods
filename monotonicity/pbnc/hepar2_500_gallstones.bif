@@ -1,0 +1,931 @@
+network unknown {
+}
+variable gallstones {
+  type discrete [ 2 ] { present, absent };
+}
+variable choledocholithotomy {
+  type discrete [ 2 ] { present, absent };
+}
+variable injections {
+  type discrete [ 2 ] { present, absent };
+}
+variable transfusion {
+  type discrete [ 2 ] { present, absent };
+}
+variable ChHepatitis {
+  type discrete [ 3 ] { active, persistent, absent };
+}
+variable fibrosis {
+  type discrete [ 2 ] { present, absent };
+}
+variable Cirrhosis {
+  type discrete [ 3 ] { decompensate, compensate, absent };
+}
+variable fatigue {
+  type discrete [ 2 ] { present, absent };
+}
+variable bilirubin {
+  type discrete [ 4 ] { a88_20, a19_7, a6_2, a1_0 };
+}
+variable itching {
+  type discrete [ 2 ] { present, absent };
+}
+variable upper_pain {
+  type discrete [ 2 ] { present, absent };
+}
+variable fat {
+  type discrete [ 2 ] { present, absent };
+}
+variable pressure_ruq {
+  type discrete [ 2 ] { present, absent };
+}
+variable phosphatase {
+  type discrete [ 3 ] { a4000_700, a699_240, a239_0 };
+}
+variable skin {
+  type discrete [ 2 ] { present, absent };
+}
+variable proteins {
+  type discrete [ 2 ] { a10_6, a5_2 };
+}
+variable edema {
+  type discrete [ 2 ] { present, absent };
+}
+variable platelet {
+  type discrete [ 4 ] { a597_300, a299_150, a149_100, a99_0 };
+}
+variable inr {
+  type discrete [ 3 ] { a200_110, a109_70, a69_0 };
+}
+variable bleeding {
+  type discrete [ 2 ] { present, absent };
+}
+variable flatulence {
+  type discrete [ 2 ] { present, absent };
+}
+variable alcohol {
+  type discrete [ 2 ] { present, absent };
+}
+variable encephalopathy {
+  type discrete [ 2 ] { present, absent };
+}
+variable urea {
+  type discrete [ 3 ] { a165_50, a49_40, a39_0 };
+}
+variable ascites {
+  type discrete [ 2 ] { present, absent };
+}
+variable density {
+  type discrete [ 2 ] { present, absent };
+}
+variable ESR {
+  type discrete [ 3 ] { a200_50, a49_15, a14_0 };
+}
+variable alt {
+  type discrete [ 4 ] { a850_200, a199_100, a99_35, a34_0 };
+}
+variable ast {
+  type discrete [ 4 ] { a700_400, a399_150, a149_40, a39_0 };
+}
+variable amylase {
+  type discrete [ 3 ] { a1400_500, a499_300, a299_0 };
+}
+variable ggtp {
+  type discrete [ 4 ] { a640_70, a69_30, a29_10, a9_0 };
+}
+variable cholesterol {
+  type discrete [ 3 ] { a999_350, a349_240, a239_0 };
+}
+variable hbsag {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbsag_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable spleen {
+  type discrete [ 2 ] { present, absent };
+}
+variable consciousness {
+  type discrete [ 2 ] { present, absent };
+}
+variable spiders {
+  type discrete [ 2 ] { present, absent };
+}
+variable jaundice {
+  type discrete [ 2 ] { present, absent };
+}
+variable albumin {
+  type discrete [ 3 ] { a70_50, a49_30, a29_0 };
+}
+variable edge {
+  type discrete [ 2 ] { present, absent };
+}
+variable irregular_liver {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbc_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable hcv_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable palms {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbeag {
+  type discrete [ 2 ] { present, absent };
+}
+variable carcinoma {
+  type discrete [ 2 ] { present, absent };
+}
+probability ( gallstones ){
+table 0.1530758, 0.8469242;
+}
+
+probability ( choledocholithotomy | gallstones ){
+(present) p000, 0.2897196*((1-p000)/(1-0.7102804));
+(absent) p001, 0.96283784*((1-p001)/(1-0.03716216));
+}
+
+probability ( injections | choledocholithotomy ){
+(present) p002, 0.2*((1-p002)/(1-0.8));
+(absent) p003, 0.284153*((1-p003)/(1-0.715847));
+}
+
+probability ( transfusion | choledocholithotomy ){
+(present) p004, 0.6666667*((1-p004)/(1-0.3333333));
+(absent) p005, 0.7103825*((1-p005)/(1-0.2896175));
+}
+
+probability ( ChHepatitis | transfusion, injections ){
+(present, present) p006, 0.0052356*((1-p006)/(1-0.2094241)), 0.7853403*((1-p006)/(1-0.2094241));
+(absent, present) p007, 0.05128205*((1-p007)/(1-0.15384615)), 0.79487180*((1-p007)/(1-0.15384615));
+(present, absent) p008, 0.3076923*((1-p008)/(1-0.4615385)), 0.2307692*((1-p008)/(1-0.4615385));
+(absent, absent) p009, 0.14*((1-p009)/(1-0.24)), 0.62*((1-p009)/(1-0.24));
+}
+
+probability ( fibrosis | ChHepatitis ){
+(active) p010, 0.7*((1-p010)/(1-0.3));
+(persistent) p011, 0.95*((1-p011)/(1-0.05));
+(absent) p012, 0.999*((1-p012)/(1-0.001));
+}
+
+probability ( Cirrhosis | fibrosis ){
+(present) p013, 0.24*((1-p013)/(1-0.56)), 0.20*((1-p013)/(1-0.56));
+(absent) p014, 0.15*((1-p014)/(1-0.35)), 0.50*((1-p014)/(1-0.35));
+}
+
+probability ( fatigue | ChHepatitis ){
+(active) p015, 0.3636364*((1-p015)/(1-0.6363636));
+(persistent) p016, 0.3928571*((1-p016)/(1-0.6071429));
+(absent) p017, 0.3846154*((1-p017)/(1-0.6153846));
+}
+
+probability ( bilirubin | Cirrhosis, gallstones, ChHepatitis ){
+(decompensate, present, active) p018, 0.21739130*((1-p018)/(1-0.04347826)), 0.34782609*((1-p018)/(1-0.04347826)), 0.39130435*((1-p018)/(1-0.04347826));
+(compensate, present, active) 0.03571429, 0.16071429, 0.39285714, 0.41071429;
+(absent, present, active) p019, 0.15492958*((1-p019)/(1-0.04225352)), 0.36619718*((1-p019)/(1-0.04225352)), 0.43661972*((1-p019)/(1-0.04225352));
+(decompensate, absent, active) p020, 0.11538462*((1-p020)/(1-0.01923077)), 0.36538462*((1-p020)/(1-0.01923077)), 0.50000000*((1-p020)/(1-0.01923077));
+(compensate, absent, active) 0.02020202, 0.11111111, 0.34343434, 0.52525253;
+(absent, absent, active) p021, 0.12121212*((1-p021)/(1-0.03030303)), 0.35606061*((1-p021)/(1-0.03030303)), 0.49242424*((1-p021)/(1-0.03030303));
+(decompensate, present, persistent) p022, 0.22222222*((1-p022)/(1-0.07407407)), 0.33333333*((1-p022)/(1-0.07407407)), 0.37037037*((1-p022)/(1-0.07407407));
+(compensate, present, persistent) 0.05882353, 0.20588235, 0.38235294, 0.35294118;
+(absent, present, persistent) 0.06, 0.20, 0.36, 0.38;
+(decompensate, absent, persistent) 0.01818182, 0.11818182, 0.38181818, 0.48181818;
+(compensate, absent, persistent) p023, 0.10679612*((1-p023)/(1-0.01941748)), 0.34951456*((1-p023)/(1-0.01941748)), 0.52427184*((1-p023)/(1-0.01941748));
+(absent, absent, persistent) p024, 0.11510791*((1-p024)/(1-0.02158273)), 0.37410072*((1-p024)/(1-0.02158273)), 0.48920863*((1-p024)/(1-0.02158273));
+(decompensate, present, absent) p025, 0.23684211*((1-p025)/(1-0.07894737)), 0.34210526*((1-p025)/(1-0.07894737)), 0.34210526*((1-p025)/(1-0.07894737));
+(compensate, present, absent) p026, 0.23076923*((1-p026)/(1-0.07692308)), 0.35897436*((1-p026)/(1-0.07692308)), 0.33333333*((1-p026)/(1-0.07692308));
+(absent, present, absent) 0.07575758, 0.22727273, 0.36363636, 0.33333333;
+(decompensate, absent, absent) p027, 0.12408759*((1-p027)/(1-0.02189781)), 0.41605839*((1-p027)/(1-0.02189781)), 0.43795620*((1-p027)/(1-0.02189781));
+(compensate, absent, absent) 0.02362205, 0.11811024, 0.37795276, 0.48031496;
+(absent, absent, absent) 0.02061856, 0.12371134, 0.40721649, 0.44845361;
+}
+
+probability ( itching | bilirubin ){
+(a88_20) p028, 0.125*((1-p028)/(1-0.875));
+(a19_7) p029, 0.3134328*((1-p029)/(1-0.6865672));
+(a6_2) p030, 0.4522613*((1-p030)/(1-0.5477387));
+(a1_0) p031, 0.6666667*((1-p031)/(1-0.3333333));
+}
+
+probability ( upper_pain | gallstones ){
+(present) p032, 0.588785*((1-p032)/(1-0.411215));
+(absent) p033, 0.6131757*((1-p033)/(1-0.3868243));
+}
+
+probability ( fat | gallstones ){
+(present) p034, 0.8224299*((1-p034)/(1-0.1775701));
+(absent) p035, 0.7195946*((1-p035)/(1-0.2804054));
+}
+
+probability ( pressure_ruq | gallstones, ChHepatitis ){
+(present, active) p036, 0.6666667*((1-p036)/(1-0.3333333));
+(absent, active) p037, 0.6575342*((1-p037)/(1-0.3424658));
+(present, persistent) p038, 0.671875*((1-p038)/(1-0.328125));
+(absent, persistent) p039, 0.6772487*((1-p039)/(1-0.3227513));
+(present, absent) p040, 0.6707317*((1-p040)/(1-0.3292683));
+(absent, absent) p041, 0.7070707*((1-p041)/(1-0.2929293));
+}
+
+probability ( phosphatase | Cirrhosis, ChHepatitis ){
+(decompensate, active) p042, 0.29166667*((1-p042)/(1-0.04166667)), 0.66666666*((1-p042)/(1-0.04166667));
+(compensate, active) p043, 0.26415094*((1-p043)/(1-0.03773585)), 0.69811321*((1-p043)/(1-0.03773585));
+(absent, active) p044, 0.21428571*((1-p044)/(1-0.03571429)), 0.75000000*((1-p044)/(1-0.03571429));
+(decompensate, persistent) p045, 0.30434783*((1-p045)/(1-0.04347826)), 0.65217391*((1-p045)/(1-0.04347826));
+(compensate, persistent) p046, 0.250*((1-p046)/(1-0.025)), 0.725*((1-p046)/(1-0.025));
+(absent, persistent) p047, 0.20454545*((1-p047)/(1-0.02272727)), 0.77272728*((1-p047)/(1-0.02272727));
+(decompensate, absent) p048, 0.33333333*((1-p048)/(1-0.04166667)), 0.62500000*((1-p048)/(1-0.04166667));
+(compensate, absent) p049, 0.27027027*((1-p049)/(1-0.02702703)), 0.70270270*((1-p049)/(1-0.02702703));
+(absent, absent) 0.02325581, 0.18604651, 0.79069768;
+}
+
+probability ( skin | bilirubin ){
+(a88_20) p050, 0.00621118*((1-p050)/(1-0.99378882));
+(a19_7) p051, 0.1044776*((1-p051)/(1-0.8955224));
+(a6_2) p052, 0.2964824*((1-p052)/(1-0.7035176));
+(a1_0) p053, 0.8177458*((1-p053)/(1-0.1822542));
+}
+
+probability ( proteins | Cirrhosis ){
+(decompensate) p054, 0.00172117*((1-p054)/(1-0.99827883));
+(compensate) p055, 0.00321543*((1-p055)/(1-0.99678457));
+(absent) p056, 0.01967213*((1-p056)/(1-0.98032787));
+}
+
+probability ( edema | Cirrhosis ){
+(decompensate) p057, 0.6551724*((1-p057)/(1-0.3448276));
+(compensate) p058, 0.93548387*((1-p058)/(1-0.06451613));
+(absent) p059, 0.8688525*((1-p059)/(1-0.1311475));
+}
+
+probability ( platelet | Cirrhosis ){
+(decompensate) p060, 0.63690476*((1-p060)/(1-0.06547619)), 0.17857143*((1-p060)/(1-0.06547619)), 0.11904762*((1-p060)/(1-0.06547619));
+(compensate) p061, 0.63934426*((1-p061)/(1-0.06557377)), 0.17486339*((1-p061)/(1-0.06557377)), 0.12021858*((1-p061)/(1-0.06557377));
+(absent) p062, 0.67142857*((1-p062)/(1-0.06428571)), 0.15714286*((1-p062)/(1-0.06428571)), 0.10714286*((1-p062)/(1-0.06428571));
+}
+
+probability ( inr | ChHepatitis, Cirrhosis ){
+(active, decompensate) p063, 0.84210526*((1-p063)/(1-0.01754386)), 0.14035088*((1-p063)/(1-0.01754386));
+(persistent, decompensate) p064, 0.84848485*((1-p064)/(1-0.03030303)), 0.12121212*((1-p064)/(1-0.03030303));
+(absent, decompensate) p065, 0.81034483*((1-p065)/(1-0.03448276)), 0.15517241*((1-p065)/(1-0.03448276));
+(active, compensate) p066, 0.850*((1-p066)/(1-0.025)), 0.125*((1-p066)/(1-0.025));
+(persistent, compensate) p067, 0.82456140*((1-p067)/(1-0.03508772)), 0.14035088*((1-p067)/(1-0.03508772));
+(absent, compensate) p068, 0.76785715*((1-p068)/(1-0.01785714)), 0.21428571*((1-p068)/(1-0.01785714));
+(active, absent) 0.02197802, 0.89010989, 0.08791209;
+(persistent, absent) p069, 0.88135593*((1-p069)/(1-0.05084746)), 0.06779661*((1-p069)/(1-0.05084746));
+(absent, absent) p070, 0.84210526*((1-p070)/(1-0.03508772)), 0.12280702*((1-p070)/(1-0.03508772));
+}
+
+probability ( bleeding | platelet, inr ){
+(a597_300, a200_110) p071, 0.8571429*((1-p071)/(1-0.1428571));
+(a299_150, a200_110) p072, 0.8695652*((1-p072)/(1-0.1304348));
+(a149_100, a200_110) p073, 0.8*((1-p073)/(1-0.2));
+(a99_0, a200_110) p074, 0.5*((1-p074)/(1-0.5));
+(a597_300, a109_70) p075, 0.893617*((1-p075)/(1-0.106383));
+(a299_150, a109_70) p076, 0.8626506*((1-p076)/(1-0.1373494));
+(a149_100, a109_70) p077, 0.8666667*((1-p077)/(1-0.1333333));
+(a99_0, a109_70) p078, 0.744186*((1-p078)/(1-0.255814));
+(a597_300, a69_0) p079, 0.90909091*((1-p079)/(1-0.09090909));
+(a299_150, a69_0) p080, 0.575*((1-p080)/(1-0.425));
+(a149_100, a69_0) p081, 0.75*((1-p081)/(1-0.25));
+(a99_0, a69_0) p082, 0.3333333*((1-p082)/(1-0.6666667));
+}
+
+probability ( flatulence | gallstones ){
+(present) p083, 0.6074766*((1-p083)/(1-0.3925234));
+(absent) p084, 0.5692568*((1-p084)/(1-0.4307432));
+}
+
+probability ( alcohol | Cirrhosis ){
+(decompensate) p085, 0.7931034*((1-p085)/(1-0.2068966));
+(compensate) p086, 0.7741936*((1-p086)/(1-0.2258064));
+(absent) p087, 0.8885246*((1-p087)/(1-0.1114754));
+}
+
+probability ( encephalopathy | Cirrhosis ){
+(decompensate) p088, 0.94674556*((1-p088)/(1-0.05325444));
+(compensate) p089, 0.95108696*((1-p089)/(1-0.04891304));
+(absent) p090, 0.94642857*((1-p090)/(1-0.05357143));
+}
+
+probability ( urea | encephalopathy ){
+(present) p091, 0.1304348*((1-p091)/(1-0.2173913)), 0.6521739*((1-p091)/(1-0.2173913));
+(absent) p092, 0.06508876*((1-p092)/(1-0.03550296)), 0.89940828*((1-p092)/(1-0.03550296));
+}
+
+probability ( ascites | proteins ){
+(a10_6) p093, 0.8719068*((1-p093)/(1-0.1280932));
+(a5_2) p094, 0.4166667*((1-p094)/(1-0.5833333));
+}
+
+probability ( density | encephalopathy ){
+(present) p095, 0.2608696*((1-p095)/(1-0.7391304));
+(absent) p096, 0.6227811*((1-p096)/(1-0.3772189));
+}
+
+probability ( ESR | ChHepatitis ){
+(active) p097, 0.1721312*((1-p097)/(1-0.2704918)), 0.5573770*((1-p097)/(1-0.2704918));
+(persistent) p098, 0.1767956*((1-p098)/(1-0.3093923)), 0.5138121*((1-p098)/(1-0.3093923));
+(absent) p099, 0.1712963*((1-p099)/(1-0.3425926)), 0.4861111*((1-p099)/(1-0.3425926));
+}
+
+probability ( alt | ChHepatitis, Cirrhosis ){
+(active, decompensate) 0.05882353, 0.15686275, 0.41176471, 0.37254902;
+(persistent, decompensate) 0.05172414, 0.15517241, 0.39655172, 0.39655172;
+(absent, decompensate) p100, 0.12*((1-p100)/(1-0.02)), 0.40*((1-p100)/(1-0.02)), 0.46*((1-p100)/(1-0.02));
+(active, compensate) 0.05454545, 0.16363636, 0.41818182, 0.36363636;
+(persistent, compensate) p101, 0.13043478*((1-p101)/(1-0.02173913)), 0.41304348*((1-p101)/(1-0.02173913)), 0.43478261*((1-p101)/(1-0.02173913));
+(absent, compensate) p102, 0.12738854*((1-p102)/(1-0.00212314)), 0.42462845*((1-p102)/(1-0.00212314)), 0.44585987*((1-p102)/(1-0.00212314));
+(active, absent) 0.04761905, 0.15873016, 0.41269841, 0.38095238;
+(persistent, absent) p103, 0.1084599*((1-p103)/(1-0.0021692)), 0.3904555*((1-p103)/(1-0.0021692)), 0.4989154*((1-p103)/(1-0.0021692));
+(absent, absent) p104, 0.11516315*((1-p104)/(1-0.00191939)), 0.42226488*((1-p104)/(1-0.00191939)), 0.46065259*((1-p104)/(1-0.00191939));
+}
+
+probability ( ast | ChHepatitis, Cirrhosis ){
+(active, decompensate) 0.01960784, 0.13725490, 0.47058824, 0.37254902;
+(persistent, decompensate) p105, 0.14035088*((1-p105)/(1-0.01754386)), 0.45614035*((1-p105)/(1-0.01754386)), 0.38596491*((1-p105)/(1-0.01754386));
+(absent, decompensate) p106, 0.09980040*((1-p106)/(1-0.00199601)), 0.45908184*((1-p106)/(1-0.00199601)), 0.43912176*((1-p106)/(1-0.00199601));
+(active, compensate) 0.01818182, 0.12727273, 0.49090909, 0.36363636;
+(persistent, compensate) 0.00221729, 0.08869180, 0.48780488, 0.42128603;
+(absent, compensate) 0.00212314, 0.08492569, 0.48832272, 0.42462845;
+(active, absent) 0.01612903, 0.14516129, 0.46774194, 0.37096774;
+(persistent, absent) 0.00212314, 0.08492569, 0.44585987, 0.46709130;
+(absent, absent) 0.00191939, 0.07677543, 0.46065259, 0.46065259;
+}
+
+probability ( amylase | gallstones ){
+(present) p107, 0.04672897*((1-p107)/(1-0.01869159)), 0.93457944*((1-p107)/(1-0.01869159));
+(absent) p108, 0.01689189*((1-p108)/(1-0.01013514)), 0.97297297*((1-p108)/(1-0.01013514));
+}
+
+probability ( ggtp | ChHepatitis ){
+(active) 0.1590909, 0.1477273, 0.1136364, 0.5795454;
+(persistent) 0.1546392, 0.1443299, 0.1134021, 0.5876288;
+(absent) 0.1666667, 0.1481482, 0.1111111, 0.5740740;
+}
+
+probability ( cholesterol | ChHepatitis ){
+(active) p109, 0.28275862*((1-p109)/(1-0.08965517)), 0.62758621*((1-p109)/(1-0.08965517));
+(persistent) p110, 0.30113636*((1-p110)/(1-0.09659091)), 0.60227273*((1-p110)/(1-0.09659091));
+(absent) p111, 0.3256705*((1-p111)/(1-0.1034483)), 0.5708812*((1-p111)/(1-0.1034483));
+}
+
+probability ( hbsag | ChHepatitis ){
+(active) p112, 0.5*((1-p112)/(1-0.5));
+(persistent) p113, 0.5384615*((1-p113)/(1-0.4615385));
+(absent) p114, 0.8875*((1-p114)/(1-0.1125));
+}
+
+probability ( hbsag_anti | ChHepatitis, hbsag ){
+(active, present) p115, 0.9929078*((1-p115)/(1-0.0070922));
+(persistent, present) p116, 0.98360656*((1-p116)/(1-0.01639344));
+(absent, present) p117, 0.98901099*((1-p117)/(1-0.01098901));
+(active, absent) p118, 0.92857143*((1-p118)/(1-0.07142857));
+(persistent, absent) p119, 0.98591549*((1-p119)/(1-0.01408451));
+(absent, absent) p120, 0.95774648*((1-p120)/(1-0.04225352));
+}
+
+probability ( spleen | Cirrhosis ){
+(decompensate) p121, 0.6764706*((1-p121)/(1-0.3235294));
+(compensate) p122, 0.6976744*((1-p122)/(1-0.3023256));
+(absent) p123, 0.8378378*((1-p123)/(1-0.1621622));
+}
+
+probability ( consciousness | encephalopathy ){
+(present) p124, 0.6956522*((1-p124)/(1-0.3043478));
+(absent) p125, 0.98372781*((1-p125)/(1-0.01627219));
+}
+
+probability ( spiders | Cirrhosis ){
+(decompensate) p126, 0.3965517*((1-p126)/(1-0.6034483));
+(compensate) p127, 0.516129*((1-p127)/(1-0.483871));
+(absent) p128, 0.8163934*((1-p128)/(1-0.1836066));
+}
+
+probability ( jaundice | bilirubin ){
+(a88_20) p129, 0.25*((1-p129)/(1-0.75));
+(a19_7) p130, 0.4328358*((1-p130)/(1-0.5671642));
+(a6_2) p131, 0.6532663*((1-p131)/(1-0.3467337));
+(a1_0) p132, 0.8057554*((1-p132)/(1-0.1942446));
+}
+
+probability ( albumin | Cirrhosis ){
+(decompensate) p133, 0.08605852*((1-p133)/(1-0.91222031)), 0.00172117*((1-p133)/(1-0.91222031));
+(compensate) p134, 0.00321543*((1-p134)/(1-0.96463023)), 0.03215434*((1-p134)/(1-0.96463023));
+(absent) p135, 0.1426229*((1-p135)/(1-0.7393443)), 0.1180328*((1-p135)/(1-0.7393443));
+}
+
+probability ( edge | Cirrhosis ){
+(decompensate) p136, 0.2413793*((1-p136)/(1-0.7586207));
+(compensate) p137, 0.5483871*((1-p137)/(1-0.4516129));
+(absent) p138, 0.7655738*((1-p138)/(1-0.2344262));
+}
+
+probability ( irregular_liver | Cirrhosis ){
+(decompensate) p139, 0.3965517*((1-p139)/(1-0.6034483));
+(compensate) p140, 0.6451613*((1-p140)/(1-0.3548387));
+(absent) p141, 0.8934426*((1-p141)/(1-0.1065574));
+}
+
+probability ( hbc_anti | ChHepatitis ){
+(active) p142, 0.99644128*((1-p142)/(1-0.00355872));
+(persistent) p143, 0.99236641*((1-p143)/(1-0.00763359));
+(absent) p144, 0.9125*((1-p144)/(1-0.0875));
+}
+
+probability ( hcv_anti | ChHepatitis ){
+(active) p145, 0.99644128*((1-p145)/(1-0.00355872));
+(persistent) p146, 0.99236641*((1-p146)/(1-0.00763359));
+(absent) p147, 0.99875156*((1-p147)/(1-0.00124844));
+}
+
+probability ( palms | Cirrhosis ){
+(decompensate) p148, 0.5*((1-p148)/(1-0.5));
+(compensate) p149, 0.7096774*((1-p149)/(1-0.2903226));
+(absent) p150, 0.8590164*((1-p150)/(1-0.1409836));
+}
+
+probability ( hbeag | ChHepatitis ){
+(active) p151, 0.99644128*((1-p151)/(1-0.00355872));
+(persistent) p152, 0.99236641*((1-p152)/(1-0.00763359));
+(absent) p153, 0.99875156*((1-p153)/(1-0.00124844));
+}
+
+probability ( carcinoma | Cirrhosis ){
+(decompensate) p154, 0.6363636*((1-p154)/(1-0.3636364));
+(compensate) p155, 0.7272727*((1-p155)/(1-0.2727273));
+(absent) p156, 0.9*((1-p156)/(1-0.1));
+}
+
+parameter p000{
+}
+
+parameter p001{
+}
+
+parameter p002{
+}
+
+parameter p003{
+}
+
+parameter p004{
+}
+
+parameter p005{
+}
+
+parameter p006{
+}
+
+parameter p007{
+}
+
+parameter p008{
+}
+
+parameter p009{
+}
+
+parameter p010{
+}
+
+parameter p011{
+}
+
+parameter p012{
+}
+
+parameter p013{
+}
+
+parameter p014{
+}
+
+parameter p015{
+}
+
+parameter p016{
+}
+
+parameter p017{
+}
+
+parameter p018{
+}
+
+parameter p019{
+}
+
+parameter p020{
+}
+
+parameter p021{
+}
+
+parameter p022{
+}
+
+parameter p023{
+}
+
+parameter p024{
+}
+
+parameter p025{
+}
+
+parameter p026{
+}
+
+parameter p027{
+}
+
+parameter p028{
+}
+
+parameter p029{
+}
+
+parameter p030{
+}
+
+parameter p031{
+}
+
+parameter p032{
+}
+
+parameter p033{
+}
+
+parameter p034{
+}
+
+parameter p035{
+}
+
+parameter p036{
+}
+
+parameter p037{
+}
+
+parameter p038{
+}
+
+parameter p039{
+}
+
+parameter p040{
+}
+
+parameter p041{
+}
+
+parameter p042{
+}
+
+parameter p043{
+}
+
+parameter p044{
+}
+
+parameter p045{
+}
+
+parameter p046{
+}
+
+parameter p047{
+}
+
+parameter p048{
+}
+
+parameter p049{
+}
+
+parameter p050{
+}
+
+parameter p051{
+}
+
+parameter p052{
+}
+
+parameter p053{
+}
+
+parameter p054{
+}
+
+parameter p055{
+}
+
+parameter p056{
+}
+
+parameter p057{
+}
+
+parameter p058{
+}
+
+parameter p059{
+}
+
+parameter p060{
+}
+
+parameter p061{
+}
+
+parameter p062{
+}
+
+parameter p063{
+}
+
+parameter p064{
+}
+
+parameter p065{
+}
+
+parameter p066{
+}
+
+parameter p067{
+}
+
+parameter p068{
+}
+
+parameter p069{
+}
+
+parameter p070{
+}
+
+parameter p071{
+}
+
+parameter p072{
+}
+
+parameter p073{
+}
+
+parameter p074{
+}
+
+parameter p075{
+}
+
+parameter p076{
+}
+
+parameter p077{
+}
+
+parameter p078{
+}
+
+parameter p079{
+}
+
+parameter p080{
+}
+
+parameter p081{
+}
+
+parameter p082{
+}
+
+parameter p083{
+}
+
+parameter p084{
+}
+
+parameter p085{
+}
+
+parameter p086{
+}
+
+parameter p087{
+}
+
+parameter p088{
+}
+
+parameter p089{
+}
+
+parameter p090{
+}
+
+parameter p091{
+}
+
+parameter p092{
+}
+
+parameter p093{
+}
+
+parameter p094{
+}
+
+parameter p095{
+}
+
+parameter p096{
+}
+
+parameter p097{
+}
+
+parameter p098{
+}
+
+parameter p099{
+}
+
+parameter p100{
+}
+
+parameter p101{
+}
+
+parameter p102{
+}
+
+parameter p103{
+}
+
+parameter p104{
+}
+
+parameter p105{
+}
+
+parameter p106{
+}
+
+parameter p107{
+}
+
+parameter p108{
+}
+
+parameter p109{
+}
+
+parameter p110{
+}
+
+parameter p111{
+}
+
+parameter p112{
+}
+
+parameter p113{
+}
+
+parameter p114{
+}
+
+parameter p115{
+}
+
+parameter p116{
+}
+
+parameter p117{
+}
+
+parameter p118{
+}
+
+parameter p119{
+}
+
+parameter p120{
+}
+
+parameter p121{
+}
+
+parameter p122{
+}
+
+parameter p123{
+}
+
+parameter p124{
+}
+
+parameter p125{
+}
+
+parameter p126{
+}
+
+parameter p127{
+}
+
+parameter p128{
+}
+
+parameter p129{
+}
+
+parameter p130{
+}
+
+parameter p131{
+}
+
+parameter p132{
+}
+
+parameter p133{
+}
+
+parameter p134{
+}
+
+parameter p135{
+}
+
+parameter p136{
+}
+
+parameter p137{
+}
+
+parameter p138{
+}
+
+parameter p139{
+}
+
+parameter p140{
+}
+
+parameter p141{
+}
+
+parameter p142{
+}
+
+parameter p143{
+}
+
+parameter p144{
+}
+
+parameter p145{
+}
+
+parameter p146{
+}
+
+parameter p147{
+}
+
+parameter p148{
+}
+
+parameter p149{
+}
+
+parameter p150{
+}
+
+parameter p151{
+}
+
+parameter p152{
+}
+
+parameter p153{
+}
+
+parameter p154{
+}
+
+parameter p155{
+}
+
+parameter p156{
+}
+
