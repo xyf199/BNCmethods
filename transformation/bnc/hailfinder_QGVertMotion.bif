@@ -1,0 +1,277 @@
+network unknown {
+}
+variable QGVertMotion {
+  type discrete [ 4 ] { StrongUp, WeakUp, Neutral, Down };
+}
+variable CombVerMo {
+  type discrete [ 4 ] { StrongUp, WeakUp, Neutral, Down };
+}
+variable AreaMeso_ALS {
+  type discrete [ 4 ] { StrongUp, WeakUp, Neutral, Down };
+}
+variable AreaMoDryAir {
+  type discrete [ 4 ] { VeryWet, Wet, Neutral, Dry };
+}
+variable CldShadeOth {
+  type discrete [ 3 ] { Cloudy, PC, Clear };
+}
+variable InsInMt {
+  type discrete [ 3 ] { None, Weak, Strong };
+}
+variable OutflowFrMt {
+  type discrete [ 3 ] { None, Weak, Strong };
+}
+variable Boundaries {
+  type discrete [ 3 ] { None, Weak, Strong };
+}
+variable CldShadeConv {
+  type discrete [ 3 ] { None, Some, Marked };
+}
+variable CompPlFcst {
+  type discrete [ 3 ] { IncCapDecIns, LittleChange, DecCapIncIns };
+}
+variable CapChange {
+  type discrete [ 3 ] { Decreasing, LittleChange, Increasing };
+}
+variable InsChange {
+  type discrete [ 3 ] { Decreasing, LittleChange, Increasing };
+}
+variable MountainFcst {
+  type discrete [ 3 ] { XNIL, SIG, SVR };
+}
+variable CapInScen {
+  type discrete [ 3 ] { LessThanAve, Average, MoreThanAve };
+}
+variable InsSclInScen {
+  type discrete [ 3 ] { LessUnstable, Average, MoreUnstable };
+}
+variable PlainsFcst {
+  type discrete [ 3 ] { XNIL, SIG, SVR };
+}
+variable N34StarFcst {
+  type discrete [ 3 ] { XNIL, SIG, SVR };
+}
+variable R5Fcst {
+  type discrete [ 3 ] { XNIL, SIG, SVR };
+}
+probability ( QGVertMotion ) {
+  table 0.15, 0.15, 0.50, 0.20;
+}
+probability ( CombVerMo | QGVertMotion ){
+(StrongUp) 1.0, 0.0, 0.0, 0.0;
+(WeakUp) 0.9, 0.1, 0.0, 0.0;
+(Neutral) 0.7, 0.2, 0.1, 0.0;
+(Down) 0.2, 0.5, 0.2, 0.1;
+}
+probability ( AreaMeso_ALS | CombVerMo ){
+  (StrongUp) 1.0, 0.0, 0.0, 0.0;
+  (WeakUp) 0.0, 1.0, 0.0, 0.0;
+  (Neutral) 0.0, 0.0, 1.0, 0.0;
+  (Down) 0.0, 0.0, 0.0, 1.0;
+}
+probability ( AreaMoDryAir | AreaMeso_ALS ){
+(StrongUp) 0.99, 0.01, 0.00, 0.00;
+(WeakUp) 0.8, 0.2, 0.0, 0.0;
+(Neutral) 0.70, 0.29, 0.01, 0.00;
+(Down) 0.20, 0.74, 0.06, 0.00;
+}
+probability ( CldShadeOth | AreaMoDryAir, AreaMeso_ALS ){
+(VeryWet, StrongUp) 1.0, 0.0, 0.0;
+(Wet, StrongUp) 0.92, 0.08, 0.00;
+(Neutral, StrongUp) 0.88, 0.12, 0.00;
+(Dry, StrongUp) 0.85, 0.14, 0.01;
+(VeryWet, WeakUp) 0.95, 0.05, 0.00;
+(Wet, WeakUp) 0.90, 0.09, 0.01;
+(Neutral, WeakUp) 0.85, 0.15, 0.00;
+(Dry, WeakUp) 0.60, 0.39, 0.01;
+(VeryWet, Neutral) 0.93, 0.07, 0.00;
+(Wet, Neutral) 0.8, 0.2, 0.0;
+(Neutral, Neutral) 0.80, 0.18, 0.02;
+(Dry, Neutral) 0.78, 0.20, 0.02;
+(VeryWet, Down) 0.74, 0.25, 0.01;
+(Wet, Down) 0.65, 0.34, 0.01;
+(Neutral, Down) 0.50, 0.48, 0.02;
+(Dry, Down) 0.42, 0.55, 0.03;
+}
+probability ( InsInMt | CldShadeOth ){
+(Cloudy) 0.9, 0.1, 0.0;
+(PC) 0.60, 0.39, 0.01;
+(Clear) 0.50, 0.35, 0.15;
+}
+probability ( OutflowFrMt | InsInMt ){
+(None) 1.0, 0.0, 0.0;
+(Weak) 0.5, 0.4, 0.1;
+(Strong) 0.05, 0.45, 0.50;
+}
+probability ( Boundaries | OutflowFrMt ){
+(None) 0.50, 0.48, 0.02;
+(Weak) 0.30, 0.63, 0.07;
+(Strong) 0.00, 0.55, 0.45;
+}
+probability ( CldShadeConv | InsInMt ){
+(None) 1.0, 0.0, 0.0;
+(Weak) 0.3, 0.6, 0.1;
+(Strong) 0.0, 0.3, 0.7;
+}
+probability ( CompPlFcst | Boundaries, CldShadeConv, AreaMeso_ALS, CldShadeOth ){
+  (None, None, StrongUp, Cloudy) 0.40, 0.35, 0.25;
+  (Weak, None, StrongUp, Cloudy) 0.35, 0.35, 0.30;
+  (Strong, None, StrongUp, Cloudy) 0.3, 0.3, 0.4;
+  (None, Some, StrongUp, Cloudy) 0.40, 0.35, 0.25;
+  (Weak, Some, StrongUp, Cloudy) 0.35, 0.35, 0.30;
+  (Strong, Some, StrongUp, Cloudy) 0.3, 0.3, 0.4;
+  (None, Marked, StrongUp, Cloudy) 0.45, 0.30, 0.25;
+  (Weak, Marked, StrongUp, Cloudy) 0.40, 0.35, 0.25;
+  (Strong, Marked, StrongUp, Cloudy) 0.30, 0.35, 0.35;
+  (None, None, WeakUp, Cloudy) 0.60, 0.25, 0.15;
+  (Weak, None, WeakUp, Cloudy) 0.50, 0.25, 0.25;
+  (Strong, None, WeakUp, Cloudy) 0.35, 0.25, 0.40;
+  (None, Some, WeakUp, Cloudy) 0.65, 0.25, 0.10;
+  (Weak, Some, WeakUp, Cloudy) 0.55, 0.25, 0.20;
+  (Strong, Some, WeakUp, Cloudy) 0.40, 0.25, 0.35;
+  (None, Marked, WeakUp, Cloudy) 0.70, 0.22, 0.08;
+  (Weak, Marked, WeakUp, Cloudy) 0.65, 0.25, 0.10;
+  (Strong, Marked, WeakUp, Cloudy) 0.50, 0.25, 0.25;
+  (None, None, Neutral, Cloudy) 0.60, 0.35, 0.05;
+  (Weak, None, Neutral, Cloudy) 0.55, 0.30, 0.15;
+  (Strong, None, Neutral, Cloudy) 0.45, 0.30, 0.25;
+  (None, Some, Neutral, Cloudy) 0.65, 0.30, 0.05;
+  (Weak, Some, Neutral, Cloudy) 0.6, 0.3, 0.1;
+  (Strong, Some, Neutral, Cloudy) 0.5, 0.3, 0.2;
+  (None, Marked, Neutral, Cloudy) 0.70, 0.27, 0.03;
+  (Weak, Marked, Neutral, Cloudy) 0.65, 0.30, 0.05;
+  (Strong, Marked, Neutral, Cloudy) 0.55, 0.35, 0.10;
+  (None, None, Down, Cloudy) 0.70, 0.27, 0.03;
+  (Weak, None, Down, Cloudy) 0.60, 0.35, 0.05;
+  (Strong, None, Down, Cloudy) 0.50, 0.35, 0.15;
+  (None, Some, Down, Cloudy) 0.75, 0.23, 0.02;
+  (Weak, Some, Down, Cloudy) 0.65, 0.30, 0.05;
+  (Strong, Some, Down, Cloudy) 0.55, 0.35, 0.10;
+  (None, Marked, Down, Cloudy) 0.85, 0.14, 0.01;
+  (Weak, Marked, Down, Cloudy) 0.78, 0.18, 0.04;
+  (Strong, Marked, Down, Cloudy) 0.70, 0.24, 0.06;
+  (None, None, StrongUp, PC) 0.10, 0.35, 0.55;
+  (Weak, None, StrongUp, PC) 0.05, 0.35, 0.60;
+  (Strong, None, StrongUp, PC) 0.01, 0.25, 0.74;
+  (None, Some, StrongUp, PC) 0.25, 0.30, 0.45;
+  (Weak, Some, StrongUp, PC) 0.10, 0.35, 0.55;
+  (Strong, Some, StrongUp, PC) 0.05, 0.60, 0.35;
+  (None, Marked, StrongUp, PC) 0.4, 0.3, 0.3;
+  (Weak, Marked, StrongUp, PC) 0.25, 0.40, 0.35;
+  (Strong, Marked, StrongUp, PC) 0.15, 0.35, 0.50;
+  (None, None, WeakUp, PC) 0.4, 0.3, 0.3;
+  (Weak, None, WeakUp, PC) 0.30, 0.35, 0.35;
+  (Strong, None, WeakUp, PC) 0.15, 0.40, 0.45;
+  (None, Some, WeakUp, PC) 0.45, 0.30, 0.25;
+  (Weak, Some, WeakUp, PC) 0.35, 0.35, 0.30;
+  (Strong, Some, WeakUp, PC) 0.2, 0.4, 0.4;
+  (None, Marked, WeakUp, PC) 0.55, 0.30, 0.15;
+  (Weak, Marked, WeakUp, PC) 0.45, 0.35, 0.20;
+  (Strong, Marked, WeakUp, PC) 0.35, 0.35, 0.30;
+  (None, None, Neutral, PC) 0.45, 0.40, 0.15;
+  (Weak, None, Neutral, PC) 0.4, 0.4, 0.2;
+  (Strong, None, Neutral, PC) 0.3, 0.4, 0.3;
+  (None, Some, Neutral, PC) 0.5, 0.4, 0.1;
+  (Weak, Some, Neutral, PC) 0.45, 0.40, 0.15;
+  (Strong, Some, Neutral, PC) 0.35, 0.40, 0.25;
+  (None, Marked, Neutral, PC) 0.6, 0.3, 0.1;
+  (Weak, Marked, Neutral, PC) 0.55, 0.30, 0.15;
+  (Strong, Marked, Neutral, PC) 0.45, 0.35, 0.20;
+  (None, None, Down, PC) 0.65, 0.30, 0.05;
+  (Weak, None, Down, PC) 0.6, 0.3, 0.1;
+  (Strong, None, Down, PC) 0.48, 0.32, 0.20;
+  (None, Some, Down, PC) 0.70, 0.26, 0.04;
+  (Weak, Some, Down, PC) 0.65, 0.30, 0.05;
+  (Strong, Some, Down, PC) 0.55, 0.30, 0.15;
+  (None, Marked, Down, PC) 0.80, 0.17, 0.03;
+  (Weak, Marked, Down, PC) 0.75, 0.20, 0.05;
+  (Strong, Marked, Down, PC) 0.65, 0.28, 0.07;
+  (None, None, StrongUp, Clear) 0.05, 0.30, 0.65;
+  (Weak, None, StrongUp, Clear) 0.03, 0.25, 0.72;
+  (Strong, None, StrongUp, Clear) 0.01, 0.20, 0.79;
+  (None, Some, StrongUp, Clear) 0.15, 0.35, 0.50;
+  (Weak, Some, StrongUp, Clear) 0.05, 0.30, 0.65;
+  (Strong, Some, StrongUp, Clear) 0.04, 0.27, 0.69;
+  (None, Marked, StrongUp, Clear) 0.35, 0.30, 0.35;
+  (Weak, Marked, StrongUp, Clear) 0.2, 0.4, 0.4;
+  (Strong, Marked, StrongUp, Clear) 0.13, 0.35, 0.52;
+  (None, None, WeakUp, Clear) 0.2, 0.5, 0.3;
+  (Weak, None, WeakUp, Clear) 0.15, 0.45, 0.40;
+  (Strong, None, WeakUp, Clear) 0.10, 0.35, 0.55;
+  (None, Some, WeakUp, Clear) 0.25, 0.50, 0.25;
+  (Weak, Some, WeakUp, Clear) 0.2, 0.5, 0.3;
+  (Strong, Some, WeakUp, Clear) 0.12, 0.43, 0.45;
+  (None, Marked, WeakUp, Clear) 0.40, 0.45, 0.15;
+  (Weak, Marked, WeakUp, Clear) 0.3, 0.5, 0.2;
+  (Strong, Marked, WeakUp, Clear) 0.20, 0.45, 0.35;
+  (None, None, Neutral, Clear) 0.25, 0.45, 0.30;
+  (Weak, None, Neutral, Clear) 0.2, 0.4, 0.4;
+  (Strong, None, Neutral, Clear) 0.15, 0.40, 0.45;
+  (None, Some, Neutral, Clear) 0.30, 0.45, 0.25;
+  (Weak, Some, Neutral, Clear) 0.25, 0.50, 0.25;
+  (Strong, Some, Neutral, Clear) 0.20, 0.45, 0.35;
+  (None, Marked, Neutral, Clear) 0.55, 0.33, 0.12;
+  (Weak, Marked, Neutral, Clear) 0.5, 0.3, 0.2;
+  (Strong, Marked, Neutral, Clear) 0.40, 0.35, 0.25;
+  (None, None, Down, Clear) 0.60, 0.35, 0.05;
+  (Weak, None, Down, Clear) 0.55, 0.33, 0.12;
+  (Strong, None, Down, Clear) 0.45, 0.35, 0.20;
+  (None, Some, Down, Clear) 0.65, 0.32, 0.03;
+  (Weak, Some, Down, Clear) 0.60, 0.35, 0.05;
+  (Strong, Some, Down, Clear) 0.5, 0.4, 0.1;
+  (None, Marked, Down, Clear) 0.75, 0.23, 0.02;
+  (Weak, Marked, Down, Clear) 0.70, 0.25, 0.05;
+  (Strong, Marked, Down, Clear) 0.6, 0.3, 0.1;
+}
+probability ( CapChange | CompPlFcst ){
+  (IncCapDecIns) 0.0, 0.0, 1.0;
+  (LittleChange) 0.0, 1.0, 0.0;
+  (DecCapIncIns) 1.0, 0.0, 0.0;
+}
+probability ( InsChange | CompPlFcst ){
+(IncCapDecIns) 0.00, 0.05, 0.95;
+(LittleChange) 0.00, 0.12, 0.88;
+(DecCapIncIns) 0.05, 0.15, 0.80;
+}
+probability ( MountainFcst | InsInMt ){
+  (None) 1.0, 0.0, 0.0;
+  (Weak) 0.48, 0.50, 0.02;
+  (Strong) 0.2, 0.5, 0.3;
+}
+probability ( CapInScen | CapChange ){
+(Decreasing) 1.0, 0.0, 0.0;
+(LittleChange) 0.98, 0.02, 0.00;
+(Increasing) 0.35, 0.35, 0.30;
+}
+probability ( InsSclInScen | InsChange ){
+(Decreasing) 1.0, 0.0, 0.0;
+(LittleChange) 0.9, 0.1, 0.0;
+(Increasing) 0.40, 0.35, 0.25;
+}
+probability ( PlainsFcst | InsSclInScen, CapInScen ){
+(LessUnstable, LessThanAve) 0.75, 0.20, 0.05;
+(Average, LessThanAve) 0.5, 0.3, 0.2;
+(MoreUnstable, LessThanAve) 0.35, 0.20, 0.45;
+(LessUnstable, Average) 0.75, 0.20, 0.05;
+(Average, Average) 0.35, 0.30, 0.35;
+(MoreUnstable, Average) 0.25, 0.15, 0.60;
+(LessUnstable, MoreThanAve) 0.75, 0.20, 0.05;
+(Average, MoreThanAve) 0.5, 0.2, 0.3;
+(MoreUnstable, MoreThanAve) 0.40, 0.08, 0.52;
+}
+probability ( N34StarFcst | PlainsFcst ){
+(XNIL) 0.94, 0.05, 0.01;
+(SIG) 0.06, 0.89, 0.05;
+(SVR) 0.01, 0.05, 0.94;
+}
+probability ( R5Fcst | MountainFcst, N34StarFcst ){
+  (XNIL, XNIL) 1.0, 0.0, 0.0;
+  (SIG, XNIL) 0.0, 1.0, 0.0;
+  (SVR, XNIL) 0.0, 0.0, 1.0;
+  (XNIL, SIG) 0.0, 1.0, 0.0;
+  (SIG, SIG) 0.0, 1.0, 0.0;
+  (SVR, SIG) 0.0, 0.0, 1.0;
+  (XNIL, SVR) 0.0, 0.0, 1.0;
+  (SIG, SVR) 0.0, 0.0, 1.0;
+  (SVR, SVR) 0.0, 0.0, 1.0;
+}

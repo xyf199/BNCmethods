@@ -1,0 +1,244 @@
+network unknown {
+}
+variable D0_56_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N56_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable N56_d_f {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable N54_d_m {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable D0_56_a_f {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable N54_a_m {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable D0_57_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N57_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable N57_d_f {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable D0_57_a_x {
+  type discrete [ 2 ] { x, y };
+}
+variable N57_a_f {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable D0_58_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N58_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable N58_d_f {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable D0_58_a_x {
+  type discrete [ 2 ] { x, y };
+}
+variable N58_a_f {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable D0_59_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N59_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable N59_d_f {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable D0_59_a_x {
+  type discrete [ 2 ] { x, y };
+}
+variable N59_a_f {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable D0_54_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N54_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable N23_d_m {
+  type discrete [ 2 ] { 1, 2 };
+}
+variable D0_54_a_x {
+  type discrete [ 2 ] { x, y };
+}
+variable N23_a_m {
+  type discrete [ 4 ] { 1, 2, 3, 4 };
+}
+variable D0_23_d_p {
+  type discrete [ 2 ] { a, n };
+}
+variable N23_d_g {
+  type discrete [ 3 ] { 1_1, 1_2, 2_2 };
+}
+variable Z_23_d_m {
+  type discrete [ 2 ] { f, m };
+}
+variable D0_23_a_x {
+  type discrete [ 2 ] { x, y };
+}
+variable Z_23_a_m {
+  type discrete [ 2 ] { f, m };
+}
+probability ( D0_56_d_p | N56_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N56_d_g | N56_d_f ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( N56_d_f | N54_d_m ){
+(1) 1.0, 0.0;
+(2) 1.0, 0.0;
+}
+probability ( N54_d_m | N23_d_m ){
+(1) 1.0, 0.0;
+(2) 1.0, 0.0;
+}
+probability ( D0_56_a_f | N54_a_m ){
+(1) 1.0, 0.0, 0.0, 0.0;
+(2) 1.0, 0.0, 0.0, 0.0;
+(3) 1.0, 0.0, 0.0, 0.0;
+(4) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( N54_a_m | N23_a_m ){
+(1) 1.0, 0.0, 0.0, 0.0;
+(2) 1.0, 0.0, 0.0, 0.0;
+(3) 1.0, 0.0, 0.0, 0.0;
+(4) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( D0_57_d_p | N57_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N57_d_g | N57_d_f ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( N57_d_f | N54_d_m ){
+(1) 1.0, 0.0;
+(2) 1.0, 0.0;
+}
+probability ( D0_57_a_x | N57_a_f ){
+(1) 0.0, 1.0;
+(2) 0.0, 1.0;
+(3) 1.0, 0.0;
+(4) 0.0, 1.0;
+}
+probability ( N57_a_f | N54_a_m ){
+(1) 1.0, 0.0, 0.0, 0.0;
+(2) 1.0, 0.0, 0.0, 0.0;
+(3) 1.0, 0.0, 0.0, 0.0;
+(4) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( D0_58_d_p | N58_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N58_d_g | N58_d_f ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( N58_d_f | N54_d_m ){
+(1) 1.0, 0.0;
+(2) 1.0, 0.0;
+}
+probability ( D0_58_a_x | N58_a_f ){
+(1) 0.0, 1.0;
+(2) 0.0, 1.0;
+(3) 0.0, 1.0;
+(4) 1.0, 0.0;
+}
+probability ( N58_a_f | N54_a_m ){
+(1) 1.0, 0.0, 0.0, 0.0;
+(2) 1.0, 0.0, 0.0, 0.0;
+(3) 1.0, 0.0, 0.0, 0.0;
+(4) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( D0_59_d_p | N59_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N59_d_g | N59_d_f ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( N59_d_f | N54_d_m ){
+(1) 1.0, 0.0;
+(2) 1.0, 0.0;
+}
+probability ( D0_59_a_x | N59_a_f ){
+(1) 0.0, 1.0;
+(2) 0.0, 1.0;
+(3) 0.0, 1.0;
+(4) 0.0, 1.0;
+}
+probability ( N59_a_f | N54_a_m ){
+(1) 1.0, 0.0, 0.0, 0.0;
+(2) 1.0, 0.0, 0.0, 0.0;
+(3) 1.0, 0.0, 0.0, 0.0;
+(4) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( D0_54_d_p | N54_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N54_d_g | N54_d_m ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( N23_d_m | Z_23_d_m ){
+(f) 1.0, 0.0;
+(m) 1.0, 0.0;
+}
+probability ( D0_54_a_x | N54_a_m ){
+(1) 0.0, 1.0;
+(2) 0.0, 1.0;
+(3) 1.0, 0.0;
+(4) 0.0, 1.0;
+}
+probability ( N23_a_m | Z_23_a_m ){
+(f) 1.0, 0.0, 0.0, 0.0;
+(m) 1.0, 0.0, 0.0, 0.0;
+}
+probability ( D0_23_d_p | N23_d_g ){
+  (1_1) 1.0, 0.0;
+  (1_2) 0.0, 1.0;
+  (2_2) 0.0, 1.0;
+}
+probability ( N23_d_g | N23_d_m ){
+(1) 1.0, 0.0, 0.0;
+(2) 0.0, 1.0, 0.0;
+}
+probability ( Z_23_d_m | Z_23_a_m ){
+  (f) 0.67, 0.33;
+  (m) 0.33, 0.67;
+}
+probability ( D0_23_a_x | N23_a_m ){
+(1) 0.0, 1.0;
+(2) 0.0, 1.0;
+(3) 0.0, 1.0;
+(4) 1.0, 0.0;
+}
+probability ( Z_23_a_m ) {
+  table 0.5, 0.5;
+}

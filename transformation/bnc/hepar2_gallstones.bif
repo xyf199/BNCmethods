@@ -1,0 +1,414 @@
+network unknown {
+}
+variable gallstones {
+  type discrete [ 2 ] { present, absent };
+}
+variable choledocholithotomy {
+  type discrete [ 2 ] { present, absent };
+}
+variable injections {
+  type discrete [ 2 ] { present, absent };
+}
+variable transfusion {
+  type discrete [ 2 ] { present, absent };
+}
+variable ChHepatitis {
+  type discrete [ 3 ] { active, persistent, absent };
+}
+variable fibrosis {
+  type discrete [ 2 ] { present, absent };
+}
+variable Cirrhosis {
+  type discrete [ 3 ] { decompensate, compensate, absent };
+}
+variable fatigue {
+  type discrete [ 2 ] { present, absent };
+}
+variable bilirubin {
+  type discrete [ 4 ] { a88_20, a19_7, a6_2, a1_0 };
+}
+variable itching {
+  type discrete [ 2 ] { present, absent };
+}
+variable upper_pain {
+  type discrete [ 2 ] { present, absent };
+}
+variable fat {
+  type discrete [ 2 ] { present, absent };
+}
+variable pressure_ruq {
+  type discrete [ 2 ] { present, absent };
+}
+variable phosphatase {
+  type discrete [ 3 ] { a4000_700, a699_240, a239_0 };
+}
+variable skin {
+  type discrete [ 2 ] { present, absent };
+}
+variable proteins {
+  type discrete [ 2 ] { a10_6, a5_2 };
+}
+variable edema {
+  type discrete [ 2 ] { present, absent };
+}
+variable platelet {
+  type discrete [ 4 ] { a597_300, a299_150, a149_100, a99_0 };
+}
+variable inr {
+  type discrete [ 3 ] { a200_110, a109_70, a69_0 };
+}
+variable bleeding {
+  type discrete [ 2 ] { present, absent };
+}
+variable flatulence {
+  type discrete [ 2 ] { present, absent };
+}
+variable alcohol {
+  type discrete [ 2 ] { present, absent };
+}
+variable encephalopathy {
+  type discrete [ 2 ] { present, absent };
+}
+variable urea {
+  type discrete [ 3 ] { a165_50, a49_40, a39_0 };
+}
+variable ascites {
+  type discrete [ 2 ] { present, absent };
+}
+variable density {
+  type discrete [ 2 ] { present, absent };
+}
+variable ESR {
+  type discrete [ 3 ] { a200_50, a49_15, a14_0 };
+}
+variable alt {
+  type discrete [ 4 ] { a850_200, a199_100, a99_35, a34_0 };
+}
+variable ast {
+  type discrete [ 4 ] { a700_400, a399_150, a149_40, a39_0 };
+}
+variable amylase {
+  type discrete [ 3 ] { a1400_500, a499_300, a299_0 };
+}
+variable ggtp {
+  type discrete [ 4 ] { a640_70, a69_30, a29_10, a9_0 };
+}
+variable cholesterol {
+  type discrete [ 3 ] { a999_350, a349_240, a239_0 };
+}
+variable hbsag {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbsag_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable spleen {
+  type discrete [ 2 ] { present, absent };
+}
+variable consciousness {
+  type discrete [ 2 ] { present, absent };
+}
+variable spiders {
+  type discrete [ 2 ] { present, absent };
+}
+variable jaundice {
+  type discrete [ 2 ] { present, absent };
+}
+variable albumin {
+  type discrete [ 3 ] { a70_50, a49_30, a29_0 };
+}
+variable edge {
+  type discrete [ 2 ] { present, absent };
+}
+variable irregular_liver {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbc_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable hcv_anti {
+  type discrete [ 2 ] { present, absent };
+}
+variable palms {
+  type discrete [ 2 ] { present, absent };
+}
+variable hbeag {
+  type discrete [ 2 ] { present, absent };
+}
+variable carcinoma {
+  type discrete [ 2 ] { present, absent };
+}
+probability ( gallstones ) {
+  table 0.1530758, 0.8469242;
+}
+probability ( choledocholithotomy | gallstones ){
+  (present) 0.7102804, 0.2897196;
+  (absent) 0.03716216, 0.96283784;
+}
+probability ( injections | choledocholithotomy ){
+(present) 0.8, 0.2;
+(absent) 0.715847, 0.284153;
+}
+probability ( transfusion | choledocholithotomy ){
+(present) 0.3333333, 0.6666667;
+(absent) 0.2896175, 0.7103825;
+}
+probability ( ChHepatitis | transfusion, injections ){
+(present, present) 0.2094241, 0.0052356, 0.7853403;
+(absent, present) 0.15384615, 0.05128205, 0.79487180;
+(present, absent) 0.4615385, 0.3076923, 0.2307692;
+(absent, absent) 0.24, 0.14, 0.62;
+}
+probability ( fibrosis | ChHepatitis ){
+  (active) 0.3, 0.7;
+  (persistent) 0.05, 0.95;
+  (absent) 0.001, 0.999;
+}
+probability ( Cirrhosis | fibrosis ){
+(present) 0.56, 0.24, 0.20;
+(absent) 0.35, 0.15, 0.50;
+}
+probability ( fatigue | ChHepatitis ){
+(active) 0.6363636, 0.3636364;
+(persistent) 0.6071429, 0.3928571;
+(absent) 0.6153846, 0.3846154;
+}
+probability ( bilirubin | Cirrhosis, gallstones, ChHepatitis ){
+(decompensate, present, active) 0.04347826, 0.21739130, 0.34782609, 0.39130435;
+(compensate, present, active) 0.03571429, 0.16071429, 0.39285714, 0.41071429;
+(absent, present, active) 0.04225352, 0.15492958, 0.36619718, 0.43661972;
+(decompensate, absent, active) 0.01923077, 0.11538462, 0.36538462, 0.50000000;
+(compensate, absent, active) 0.02020202, 0.11111111, 0.34343434, 0.52525253;
+(absent, absent, active) 0.03030303, 0.12121212, 0.35606061, 0.49242424;
+(decompensate, present, persistent) 0.07407407, 0.22222222, 0.33333333, 0.37037037;
+(compensate, present, persistent) 0.05882353, 0.20588235, 0.38235294, 0.35294118;
+(absent, present, persistent) 0.06, 0.20, 0.36, 0.38;
+(decompensate, absent, persistent) 0.01818182, 0.11818182, 0.38181818, 0.48181818;
+(compensate, absent, persistent) 0.01941748, 0.10679612, 0.34951456, 0.52427184;
+(absent, absent, persistent) 0.02158273, 0.11510791, 0.37410072, 0.48920863;
+(decompensate, present, absent) 0.07894737, 0.23684211, 0.34210526, 0.34210526;
+(compensate, present, absent) 0.07692308, 0.23076923, 0.35897436, 0.33333333;
+(absent, present, absent) 0.07575758, 0.22727273, 0.36363636, 0.33333333;
+(decompensate, absent, absent) 0.02189781, 0.12408759, 0.41605839, 0.43795620;
+(compensate, absent, absent) 0.02362205, 0.11811024, 0.37795276, 0.48031496;
+(absent, absent, absent) 0.02061856, 0.12371134, 0.40721649, 0.44845361;
+}
+probability ( itching | bilirubin ){
+  (a88_20) 0.875, 0.125;
+  (a19_7) 0.6865672, 0.3134328;
+  (a6_2) 0.5477387, 0.4522613;
+  (a1_0) 0.3333333, 0.6666667;
+}
+probability ( upper_pain | gallstones ){
+  (present) 0.411215, 0.588785;
+  (absent) 0.3868243, 0.6131757;
+}
+probability ( fat | gallstones ){
+  (present) 0.1775701, 0.8224299;
+  (absent) 0.2804054, 0.7195946;
+}
+probability ( pressure_ruq | gallstones, ChHepatitis ){
+(present, active) 0.3333333, 0.6666667;
+(absent, active) 0.3424658, 0.6575342;
+(present, persistent) 0.328125, 0.671875;
+(absent, persistent) 0.3227513, 0.6772487;
+(present, absent) 0.3292683, 0.6707317;
+(absent, absent) 0.2929293, 0.7070707;
+}
+probability ( phosphatase | Cirrhosis, ChHepatitis ){
+(decompensate, active) 0.04166667, 0.29166667, 0.66666666;
+(compensate, active) 0.03773585, 0.26415094, 0.69811321;
+(absent, active) 0.03571429, 0.21428571, 0.75000000;
+(decompensate, persistent) 0.04347826, 0.30434783, 0.65217391;
+(compensate, persistent) 0.025, 0.250, 0.725;
+(absent, persistent) 0.02272727, 0.20454545, 0.77272728;
+(decompensate, absent) 0.04166667, 0.33333333, 0.62500000;
+(compensate, absent) 0.02702703, 0.27027027, 0.70270270;
+(absent, absent) 0.02325581, 0.18604651, 0.79069768;
+}
+probability ( skin | bilirubin ){
+  (a88_20) 0.99378882, 0.00621118;
+  (a19_7) 0.8955224, 0.1044776;
+  (a6_2) 0.7035176, 0.2964824;
+  (a1_0) 0.1822542, 0.8177458;
+}
+probability ( proteins | Cirrhosis ){
+  (decompensate) 0.99827883, 0.00172117;
+  (compensate) 0.99678457, 0.00321543;
+  (absent) 0.98032787, 0.01967213;
+}
+probability ( edema | Cirrhosis ){
+  (decompensate) 0.3448276, 0.6551724;
+  (compensate) 0.06451613, 0.93548387;
+  (absent) 0.1311475, 0.8688525;
+}
+probability ( platelet | Cirrhosis ){
+(decompensate) 0.06547619, 0.63690476, 0.17857143, 0.11904762;
+(compensate) 0.06557377, 0.63934426, 0.17486339, 0.12021858;
+(absent) 0.06428571, 0.67142857, 0.15714286, 0.10714286;
+}
+probability ( inr | ChHepatitis, Cirrhosis ){
+(active, decompensate) 0.01754386, 0.84210526, 0.14035088;
+(persistent, decompensate) 0.03030303, 0.84848485, 0.12121212;
+(absent, decompensate) 0.03448276, 0.81034483, 0.15517241;
+(active, compensate) 0.025, 0.850, 0.125;
+(persistent, compensate) 0.03508772, 0.82456140, 0.14035088;
+(absent, compensate) 0.01785714, 0.76785715, 0.21428571;
+(active, absent) 0.02197802, 0.89010989, 0.08791209;
+(persistent, absent) 0.05084746, 0.88135593, 0.06779661;
+(absent, absent) 0.03508772, 0.84210526, 0.12280702;
+}
+probability ( bleeding | platelet, inr ){
+  (a597_300, a200_110) 0.1428571, 0.8571429;
+  (a299_150, a200_110) 0.1304348, 0.8695652;
+  (a149_100, a200_110) 0.2, 0.8;
+  (a99_0, a200_110) 0.5, 0.5;
+  (a597_300, a109_70) 0.106383, 0.893617;
+  (a299_150, a109_70) 0.1373494, 0.8626506;
+  (a149_100, a109_70) 0.1333333, 0.8666667;
+  (a99_0, a109_70) 0.255814, 0.744186;
+  (a597_300, a69_0) 0.09090909, 0.90909091;
+  (a299_150, a69_0) 0.425, 0.575;
+  (a149_100, a69_0) 0.25, 0.75;
+  (a99_0, a69_0) 0.6666667, 0.3333333;
+}
+probability ( flatulence | gallstones ){
+  (present) 0.3925234, 0.6074766;
+  (absent) 0.4307432, 0.5692568;
+}
+probability ( alcohol | Cirrhosis ){
+  (decompensate) 0.2068966, 0.7931034;
+  (compensate) 0.2258064, 0.7741936;
+  (absent) 0.1114754, 0.8885246;
+}
+probability ( encephalopathy | Cirrhosis ){
+(decompensate) 0.05325444, 0.94674556;
+(compensate) 0.04891304, 0.95108696;
+(absent) 0.05357143, 0.94642857;
+}
+probability ( urea | encephalopathy ){
+  (present) 0.2173913, 0.1304348, 0.6521739;
+  (absent) 0.03550296, 0.06508876, 0.89940828;
+}
+probability ( ascites | proteins ){
+  (a10_6) 0.1280932, 0.8719068;
+  (a5_2) 0.5833333, 0.4166667;
+}
+probability ( density | encephalopathy ){
+  (present) 0.7391304, 0.2608696;
+  (absent) 0.3772189, 0.6227811;
+}
+probability ( ESR | ChHepatitis ){
+(active) 0.2704918, 0.1721312, 0.5573770;
+(persistent) 0.3093923, 0.1767956, 0.5138121;
+(absent) 0.3425926, 0.1712963, 0.4861111;
+}
+probability ( alt | ChHepatitis, Cirrhosis ){
+(active, decompensate) 0.05882353, 0.15686275, 0.41176471, 0.37254902;
+(persistent, decompensate) 0.05172414, 0.15517241, 0.39655172, 0.39655172;
+(absent, decompensate) 0.02, 0.12, 0.40, 0.46;
+(active, compensate) 0.05454545, 0.16363636, 0.41818182, 0.36363636;
+(persistent, compensate) 0.02173913, 0.13043478, 0.41304348, 0.43478261;
+(absent, compensate) 0.00212314, 0.12738854, 0.42462845, 0.44585987;
+(active, absent) 0.04761905, 0.15873016, 0.41269841, 0.38095238;
+(persistent, absent) 0.0021692, 0.1084599, 0.3904555, 0.4989154;
+(absent, absent) 0.00191939, 0.11516315, 0.42226488, 0.46065259;
+}
+probability ( ast | ChHepatitis, Cirrhosis ){
+(active, decompensate) 0.01960784, 0.13725490, 0.47058824, 0.37254902;
+(persistent, decompensate) 0.01754386, 0.14035088, 0.45614035, 0.38596491;
+(absent, decompensate) 0.00199601, 0.09980040, 0.45908184, 0.43912176;
+(active, compensate) 0.01818182, 0.12727273, 0.49090909, 0.36363636;
+(persistent, compensate) 0.00221729, 0.08869180, 0.48780488, 0.42128603;
+(absent, compensate) 0.00212314, 0.08492569, 0.48832272, 0.42462845;
+(active, absent) 0.01612903, 0.14516129, 0.46774194, 0.37096774;
+(persistent, absent) 0.00212314, 0.08492569, 0.44585987, 0.46709130;
+(absent, absent) 0.00191939, 0.07677543, 0.46065259, 0.46065259;
+}
+probability ( amylase | gallstones ){
+  (present) 0.01869159, 0.04672897, 0.93457944;
+  (absent) 0.01013514, 0.01689189, 0.97297297;
+}
+probability ( ggtp | ChHepatitis ){
+(active) 0.1590909, 0.1477273, 0.1136364, 0.5795454;
+(persistent) 0.1546392, 0.1443299, 0.1134021, 0.5876288;
+(absent) 0.1666667, 0.1481482, 0.1111111, 0.5740740;
+}
+probability ( cholesterol | ChHepatitis ){
+(active) 0.08965517, 0.28275862, 0.62758621;
+(persistent) 0.09659091, 0.30113636, 0.60227273;
+(absent) 0.1034483, 0.3256705, 0.5708812;
+}
+probability ( hbsag | ChHepatitis ){
+(active) 0.5, 0.5;
+(persistent) 0.4615385, 0.5384615;
+(absent) 0.1125, 0.8875;
+}
+probability ( hbsag_anti | ChHepatitis, hbsag ){
+(active, present) 0.0070922, 0.9929078;
+(persistent, present) 0.01639344, 0.98360656;
+(absent, present) 0.01098901, 0.98901099;
+(active, absent) 0.07142857, 0.92857143;
+(persistent, absent) 0.01408451, 0.98591549;
+(absent, absent) 0.04225352, 0.95774648;
+}
+probability ( spleen | Cirrhosis ){
+(decompensate) 0.3235294, 0.6764706;
+(compensate) 0.3023256, 0.6976744;
+(absent) 0.1621622, 0.8378378;
+}
+probability ( consciousness | encephalopathy ){
+  (present) 0.3043478, 0.6956522;
+  (absent) 0.01627219, 0.98372781;
+}
+probability ( spiders | Cirrhosis ){
+  (decompensate) 0.6034483, 0.3965517;
+  (compensate) 0.483871, 0.516129;
+  (absent) 0.1836066, 0.8163934;
+}
+probability ( jaundice | bilirubin ){
+  (a88_20) 0.75, 0.25;
+  (a19_7) 0.5671642, 0.4328358;
+  (a6_2) 0.3467337, 0.6532663;
+  (a1_0) 0.1942446, 0.8057554;
+}
+probability ( albumin | Cirrhosis ){
+  (decompensate) 0.91222031, 0.08605852, 0.00172117;
+  (compensate) 0.96463023, 0.00321543, 0.03215434;
+  (absent) 0.7393443, 0.1426229, 0.1180328;
+}
+probability ( edge | Cirrhosis ){
+  (decompensate) 0.7586207, 0.2413793;
+  (compensate) 0.4516129, 0.5483871;
+  (absent) 0.2344262, 0.7655738;
+}
+probability ( irregular_liver | Cirrhosis ){
+  (decompensate) 0.6034483, 0.3965517;
+  (compensate) 0.3548387, 0.6451613;
+  (absent) 0.1065574, 0.8934426;
+}
+probability ( hbc_anti | ChHepatitis ){
+(active) 0.00355872, 0.99644128;
+(persistent) 0.00763359, 0.99236641;
+(absent) 0.0875, 0.9125;
+}
+probability ( hcv_anti | ChHepatitis ){
+(active) 0.00355872, 0.99644128;
+(persistent) 0.00763359, 0.99236641;
+(absent) 0.00124844, 0.99875156;
+}
+probability ( palms | Cirrhosis ){
+  (decompensate) 0.5, 0.5;
+  (compensate) 0.2903226, 0.7096774;
+  (absent) 0.1409836, 0.8590164;
+}
+probability ( hbeag | ChHepatitis ){
+(active) 0.00355872, 0.99644128;
+(persistent) 0.00763359, 0.99236641;
+(absent) 0.00124844, 0.99875156;
+}
+probability ( carcinoma | Cirrhosis ){
+(decompensate) 0.3636364, 0.6363636;
+(compensate) 0.2727273, 0.7272727;
+(absent) 0.1, 0.9;
+}

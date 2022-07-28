@@ -1,0 +1,132 @@
+network unknown {
+}
+variable DataFile {
+  type discrete [ 2 ] { Correct, Incorrect_Corrupt };
+}
+variable AppData {
+  type discrete [ 2 ] { Correct, Incorrect_or_corrupt };
+}
+variable EMFOK {
+  type discrete [ 2 ] { Yes, No };
+}
+variable GDIIN {
+  type discrete [ 2 ] { Yes, No };
+}
+variable GDIOUT {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PrtDataOut {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DS_NTOK {
+  type discrete [ 2 ] { Yes, No };
+}
+variable DS_LCLOK {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PC2PRT {
+  type discrete [ 2 ] { Yes, No };
+}
+variable PrtData {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Problem1 {
+  type discrete [ 2 ] { Normal_Output, No_Output };
+}
+variable LclGrbld {
+  type discrete [ 2 ] { Yes, No };
+}
+variable NtGrbld {
+  type discrete [ 2 ] { Yes, No };
+}
+variable GrbldOtpt {
+  type discrete [ 2 ] { No, Yes };
+}
+variable GrbldPS {
+  type discrete [ 2 ] { No, Yes };
+}
+variable PrtFile {
+  type discrete [ 2 ] { Yes, No };
+}
+variable Problem6 {
+  type discrete [ 2 ] { No, Yes };
+}
+probability ( DataFile ) {
+  table 0.995, 0.005;
+}
+probability ( AppData | DataFile ){
+(Correct) 0.9999, 0.0001;
+(Incorrect_Corrupt) 0.0, 1.0;
+}
+probability ( EMFOK | AppData ){
+(Correct) 0.99, 0.01;
+(Incorrect_or_corrupt) 0.1, 0.9;
+}
+probability ( GDIIN | AppData, EMFOK ){
+(Correct, Yes) 1.0, 0.0;
+(Incorrect_or_corrupt, Yes) 0.0, 1.0;
+(Correct, No) 0.0, 1.0;
+(Incorrect_or_corrupt, No) 0.0, 1.0;
+}
+probability ( GDIOUT | GDIIN ){
+(Yes) 0.99, 0.01;
+(No) 0.1, 0.9;
+}
+probability ( PrtDataOut | GDIOUT ){
+(Yes) 0.99, 0.01;
+(No) 0.0, 1.0;
+}
+probability ( DS_NTOK | AppData ){
+(Correct) 0.99, 0.01;
+(Incorrect_or_corrupt) 0.2, 0.8;
+}
+probability ( DS_LCLOK | AppData ){
+(Correct) 1.0, 0.0;
+(Incorrect_or_corrupt) 0.1, 0.9;
+}
+probability ( PC2PRT | PrtDataOut, DS_NTOK, DS_LCLOK ){
+(Yes, Yes, Yes) 1.0, 0.0;
+(No, Yes, Yes) 1.0, 0.0;
+(Yes, No, Yes) 1.0, 0.0;
+(No, No, Yes) 1.0, 0.0;
+(Yes, Yes, No) 0.0, 1.0;
+(No, Yes, No) 0.0, 1.0;
+(Yes, No, No) 0.0, 1.0;
+(No, No, No) 0.0, 1.0;
+}
+probability ( PrtData | PC2PRT ){
+(Yes) 0.99, 0.01;
+(No) 0.0, 1.0;
+}
+probability ( Problem1 | PrtData ){
+  (Yes) 1.0, 0.0;
+  (No) 0.0, 1.0;
+}
+probability ( LclGrbld | AppData ){
+(Correct) 1.0, 0.0;
+(Incorrect_or_corrupt) 0.2, 0.8;
+}
+probability ( NtGrbld | AppData ){
+(Correct) 1.0, 0.0;
+(Incorrect_or_corrupt) 0.3, 0.7;
+}
+probability ( GrbldOtpt | LclGrbld, NtGrbld ){
+(Yes, Yes) 1.0, 0.0;
+(No, Yes) 0.0, 1.0;
+(Yes, No) 1.0, 0.0;
+(No, No) 0.0, 1.0;
+}
+probability ( GrbldPS | GrbldOtpt ){
+(No) 1.0, 0.0;
+(Yes) 0.0, 1.0;
+}
+probability ( PrtFile | PrtDataOut ){
+  (Yes) 0.8, 0.2;
+  (No) 0.2, 0.8;
+}
+probability ( Problem6 | GrbldOtpt, GrbldPS ){
+(No, No) 1.0, 0.0;
+(Yes, No) 1.0, 0.0;
+(No, Yes) 0.0, 1.0;
+(Yes, Yes) 0.0, 1.0;
+}

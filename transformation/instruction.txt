@@ -1,0 +1,7 @@
+1. The main method is in "transform_bn_to_bnc".
+
+2. Enter the file name (without the extension .bif)
+
+3. Enter the name of the root you choose
+
+4. The bnc file is in the folder "bnc" with the name "filename_rootname.bif"

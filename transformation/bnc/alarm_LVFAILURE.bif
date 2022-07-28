@@ -1,0 +1,61 @@
+network unknown {
+}
+variable HISTORY {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable CVP {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+variable PCWP {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+variable LVEDVOLUME {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+variable LVFAILURE {
+  type discrete [ 2 ] { TRUE, FALSE };
+}
+variable STROKEVOLUME {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+variable CO {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+variable BP {
+  type discrete [ 3 ] { LOW, NORMAL, HIGH };
+}
+probability ( HISTORY | LVFAILURE ){
+  (TRUE) 0.9, 0.1;
+  (FALSE) 0.01, 0.99;
+}
+probability ( CVP | LVEDVOLUME ){
+  (LOW) 0.95, 0.04, 0.01;
+  (NORMAL) 0.04, 0.95, 0.01;
+  (HIGH) 0.01, 0.29, 0.70;
+}
+probability ( PCWP | LVEDVOLUME ){
+  (LOW) 0.95, 0.04, 0.01;
+  (NORMAL) 0.04, 0.95, 0.01;
+  (HIGH) 0.01, 0.04, 0.95;
+}
+probability ( LVEDVOLUME | LVFAILURE ){
+(TRUE) 0.95, 0.04, 0.01;
+(FALSE) 0.01, 0.09, 0.90;
+}
+probability ( LVFAILURE ) {
+  table 0.05, 0.95;
+}
+probability ( STROKEVOLUME | LVFAILURE ){
+(TRUE) 0.98, 0.01, 0.01;
+(FALSE) 0.50, 0.49, 0.01;
+}
+probability ( CO | STROKEVOLUME ){
+(LOW) 0.98, 0.01, 0.01;
+(NORMAL) 0.95, 0.04, 0.01;
+(HIGH) 0.30, 0.69, 0.01;
+}
+probability ( BP | CO ){
+(LOW) 0.98, 0.01, 0.01;
+(NORMAL) 0.98, 0.01, 0.01;
+(HIGH) 0.90, 0.09, 0.01;
+}
