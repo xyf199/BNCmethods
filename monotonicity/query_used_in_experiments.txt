@@ -11,7 +11,7 @@ hepar2_100_hepatotoxic: 1. nausea = present
                         3. spleen = present, nausea = present, anorexia = absent, ggtp = a9_0
                     
 hepar2_100_gallstones: 1. urea = a39_0, ascites = present
-                       2. edge = present, hbsag = absent, proteins = a5_2
+                       2. palms = present, albumin = a70_50, jaundice = present, density = absent, consciousness = absent
                        3. gallstones = absent, choledocholithotomy = present, fibrosis = present, Cirrhosis = compensate, upper_pain = present, fat = absent, skin = present, edema = absent, platelet = a99_0, bleeding = present, flatulence = present, alcohol = present, encephalopathy = present, urea = a39_0, ascites = present
 
 hepar2_500_gallstones: 1. palms = absent
