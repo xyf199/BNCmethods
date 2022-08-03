@@ -5,3 +5,5 @@
 3. Enter the name of the root you choose
 
 4. The bnc file is in the folder "bnc" with the name "filename_rootname.bif"
+
+Note: Please double-check the tranlated BNC files. CPT entities may be missing due to something unexpected, for example the name of a node is a subset of the name of another node. In our translated BNCs, we have and only have missing CPT entities for the BN andes.bif until now.
