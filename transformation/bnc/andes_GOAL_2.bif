@@ -733,6 +733,14 @@ probability ( SNode_119 | SNode_93, SNode_117, SNode_118 ){
 (true, true, true) 0.9, 0.1;
 }
 probability ( SNode_120 | SNode_93, GOAL_113, SNode_117 ){
+  (false, false, false, false, false) 0.9, 0.1;
+  (false, true, false, false, false) 0.9, 0.1;
+  (false, false, true, false, false) 0.9, 0.1;
+  (false, true, true, false, false) 0.9, 0.1;
+  (false, false, false, true, false) 0.9, 0.1;
+  (false, true, false, true, false) 0.9, 0.1;
+  (false, false, true, true, false) 0.9, 0.1;
+  (false, true, true, true, false) 0.9, 0.1;
 }
 probability ( GOAL_121 | GOAL_109 ){
 (false) 0.8, 0.2;
@@ -851,6 +859,14 @@ probability ( SNode_134 | SNode_91, SNode_93, GOAL_129, SNode_133 ){
 (true, true, true, true) 0.9, 0.1;
 }
 probability ( SNode_135 | SNode_93, GOAL_129, SNode_133 ){
+ (false, false, false, false, false) 0.9, 0.1;
+ (false, true, false, false, false) 0.9, 0.1;
+ (false, false, true, false, false) 0.9, 0.1;
+ (false, true, true, false, false) 0.9, 0.1;
+ (false, false, false, true, false) 0.9, 0.1;
+ (false, true, false, true, false) 0.9, 0.1;
+ (false, false, true, true, false) 0.9, 0.1;
+ (false, true, true, true, false) 0.9, 0.1;
 }
 probability ( SNode_154 | GOAL_121 ){
 (false) 0.8, 0.2;
