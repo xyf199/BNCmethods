@@ -6,4 +6,4 @@
 
 4. The bnc file is in the folder "bnc" with the name "filename_rootname.bif"
 
-Note: Please double-check the tranlated BNC files. CPT entities may be missing due to something unexpected, for example the name of a node is a subset of the name of another node. In our translated BNCs, we have and only have missing CPT entities for the BN andes.bif until now.
+Note: Please double-check the tranlated BNC files. CPT entities may be missing due to something unexpected, for example the name of a node is a subset of the name of another node. In our translated BNCs, we have and only have 2 missing CPTs (for the node SNode_120 and SNode_135) in the BN andes.bif until now.
