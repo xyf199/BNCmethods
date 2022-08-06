@@ -1,19 +1,27 @@
 1. To check monotonicity for parameters, please first install the SMT-Solver dreal, it is availiable under http://dreal.github.io.
 
-2. The main method is in monotonicity.cpp.
+2. The main method is in monotonicity.cpp, we use checkmonotonicity4() in the main method.
 
-3. Enter the file name. (for example, hepar2_100_hepatotoxic)
+3. Enter the file name (for example, hepar2_100_hepatotoxic).
 
 4. Enter the query (for example, a = yes, b = no, c = yes, d = no). We use yes/no (words) instead of 0/1 (numbers).
 
-Note1: In the experiments, we use the non-standard version of bif files for parameter, that is, e.g. parameter p0 is written as p00
-if we have up to double-digit parameters, p0 is written as p000 if we have up to three-figure parameters. We use the method
-replaceparameter() or replaceparameter2() to get the derived files. Replaceparameter() is used if we have up to double-digit
+Our algorithm first checks, whether we can detect monotonicity for parameters only according to the BNC structure and CPT entites. If we can, we directly get the output. If we cannot, we use the first derivative and the SMT-Solver to get the monotonicity.
+
+
+Note1: In the experiments, we use the non-standard version of bif files for parameter, that is, e.g. parameter p0 is written as p00, p10 remains the same
+if we have up to double-digit parameters. p0 is written as p000, p10 is written as p010, p100 remains the same if we have up to three-figure parameters. We use the method replaceparameter() or replaceparameter2() to get the non_standard files. replaceparameter() is used if we have up to double-digit
 parameters, replaceparameter2() is used if we have three-figure parameters.
 
-Note2: We use checkmonotonicitysimplify4() to check monotonicity, if one parameter appears only in one CPT's row. If one 
-parameter can appear at rows in different CPTs (or appear at more than one row in a CPT), we use the method
-checkmonotonicitysimplify6().
 
-Note3: If we want to check monotonicity for parameters in a conditional query, we use the method:
-checkmonotonicitysimplifyundercondition().
+Note2: We use checkmonotonicitysimplify4() to check monotonicity, if one parameter appears only once in the whole BNC. If one parameter can appear more than once in the whole BNC, we use the method checkmonotonicitysimplify6(). We enter the filename and the query as above.
+
+
+Note3: The method checkmonotonicitysimplify5() tells us, for which parameters we can directly detect monotonicity according to CPT entiies, and for which parameters we should use the basic algorithm (first derivative and SMT-Solver). If we should use the basic algorithm, we don't get the monotonicity but get the output "use the basic algo". We enter the filename and the query as above.
+
+
+Note4: If we want to check monotonicity for parameters in a conditional query, we use the method checkmonotonicitysimplifyundercondition(). We enter the filename as above, the conditional query is in the form: a = yes | b = no, c = yes.
+
+
+Note5: One limination in the algorithm happens in the case if we should use the basic algorithm. The example is as follows: 
+If the sensitivity function is e.g.  ... + 0.5p0 + 0.5(1-p0) + ..., in this sensitivityfunction we know that p0 is irrelevant. However, the algorithm would give the output: The monotonicity of p0 is monotonic increasing.
