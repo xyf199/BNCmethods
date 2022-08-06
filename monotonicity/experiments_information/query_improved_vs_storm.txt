@@ -1,0 +1,17 @@
+insurance_Age: 1. Airbag = True
+               2. CarValue = FiveThou
+               3. RuggedAuto = EggShell
+               4. Theft = True
+               5. ThisCarDam = None
+               6. MedCost = Thousand
+
+
+hepar2_100_gallstones: 1. fatigue = present
+                       2. consciousness = present
+                       3. fibrosis = present
+                       4. palms = present
+                       5. carcinoma = present
+                       6. edge = present
+                       7. hbsag_anti = present
+                       8. spiders = present
+                       9. jaundice = present
