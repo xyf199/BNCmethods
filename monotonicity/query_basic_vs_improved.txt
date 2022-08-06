@@ -1,0 +1,19 @@
+asia_asia: 1. tub = yes
+           2. xray = yes, either = no
+           3. asia = no, either = yes
+
+cancer_Pollution: 1. Dyspnoea = False
+                  2. Cancer = True, Dyspnoea = True
+                  3. Pollution = high, Xray = positive
+            
+hepar2_100_hepatotoxic: 1. nausea = present
+                        2. spleen = absent, nausea = absent
+                        3. spleen = present, nausea = present, anorexia = absent, ggtp = a9_0
+                    
+hepar2_100_gallstones: 1. urea = a39_0, ascites = present
+                       2. palms = present, albumin = a70_50, jaundice = present, density = absent, consciousness = absent
+                       3. gallstones = absent, choledocholithotomy = present, fibrosis = present, Cirrhosis = compensate, upper_pain = present, fat = absent, skin = present, edema = absent, platelet = a99_0, bleeding = present, flatulence = present, alcohol = present, encephalopathy = present, urea = a39_0, ascites = present
+
+hepar2_500_gallstones: 1. palms = absent
+                       2. edge = present, hbsag = absent, proteins = a5_2
+                       3. gallstones = present, choledocholithotomy = present, injections = present, transfusion = present, ChHepatitis = active, fibrosis = present, Cirrhosis = decompensate, fatigue = present, bilirubin = a88_20, itching = present, upper_pain = present, fat = present, pressure_ruq = present, phosphatase = a4000_700, skin = present, proteins = a10_6, edema = present, platelet = a597_300, inr = a200_110, bleeding = present
